@@ -1,0 +1,11 @@
+class Solution(object):
+    def construct2DArray(self, original, m, n):
+        a=[]
+        if len(original)!=m*n:
+            return a
+        for i in range(len(original)/n):
+            b=[]
+            for j in range(n):
+                b.append(original[j+(i*n)])
+            a.append(b)
+        return a
