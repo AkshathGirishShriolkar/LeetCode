@@ -1,0 +1,27 @@
+class Solution(object):
+    def numDifferentIntegers(self, word):
+        ans=set()
+        l=''
+        if word[0].isalpha():
+            a=0
+        else:
+            a=1
+        for i in word:
+            if i.isalpha():
+                if l!='':
+                    f=int(l)
+                    ans.add(f)
+                l=''
+            elif i.isnumeric():
+                l=l+str(i)
+        o=len(word)
+        p=''
+        for i in range(o):
+            if word[o-(1+i)].isnumeric():
+                p=str(word[o-(1+i)])+p
+            else:
+                break
+        if p!='':
+            ans.add(int(p))
+        print(ans)
+        return len(ans)
