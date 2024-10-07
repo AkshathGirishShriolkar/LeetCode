@@ -1,0 +1,11 @@
+class Solution(object):
+    def numWaterBottles(self, numBottles, numExchange):
+        output=numBottles
+        nobo=numBottles
+        remainder=0
+        while nobo>=numExchange:
+            exchanged=floor(nobo/numExchange)
+            print(exchanged)
+            output=exchanged+output
+            nobo=nobo%numExchange+exchanged
+        return int(output)
