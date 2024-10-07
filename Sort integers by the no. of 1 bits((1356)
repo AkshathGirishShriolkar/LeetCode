@@ -1,0 +1,37 @@
+class Solution(object):
+    def sortByBits(self, arr):
+        a=[]
+        '''binary values(in string)'''
+        for i in arr:
+            a.append(str(bin(i)).replace('0b',''))
+        n=[]
+        '''sum of all the digits of binary value'''
+        for i in a:
+            s=0
+            for j in i:
+                s=s+int(j)
+            n.append(s)
+        ans=[]
+        z=0
+        x=0
+        print(a)
+        print(arr)
+        print(n)
+        l=len(n)
+        s=set()
+        for i in n:
+            s.add(i)
+        for i in s:
+            print(i)
+            b=[]
+            for j in range(len(n)):
+                if n[j]==i:
+                    b.append(arr[j])
+                    
+            for j in b:
+                ans.append(min(b))
+                g=b.index(min(b))
+                b[g]=100000
+            print(b)
+            
+        return ans
