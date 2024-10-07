@@ -1,0 +1,61 @@
+class Solution(object):
+    def toHex(self, num):
+        if num<0:
+            g=num*-1
+        else:
+            g=num
+        s=str(g)
+        ans=""
+        a=str(bin(g)).replace("0b",'')
+        o=''
+        print(len(a),'is the length of a')
+        if num<0:
+            o=''
+            while len(a)<32:
+                a='0'+a
+            for i in range(len(a)):
+                print(i)
+                if a[i]=='0':
+                    o=o+'1'
+                else:
+                    o=o+'0'
+            print(o)
+            o=str(int(o)+1)
+            
+            if '2' in o:
+                sh=0
+                for i in range(len(o)-1):
+                    
+                    if o[len(o)-(1+i)]=='2':
+                        o=o[:len(o)-(1+i)]+'0'+o[1+len(o)-(1+i):]
+                        sh=1
+                    elif sh==1 and o[len(o)-(1+i)]=='0':
+                        o=o[:len(o)-(1+i)]+'1'+o[1+len(o)-(1+i):]
+                        sh=0
+                    elif sh==1 and  o[len(o)-(1+i)]=='1':
+                        o=o[:len(o)-(1+i)]+'0'+o[1+len(o)-(1+i):]
+                        sh=1
+                if sh==1:
+                    if o[0]=='0':
+                        o='1'+o[1:]
+                    else:
+                        o='10'+o[1:]
+
+            a=o
+        else:
+            while len(a)%4!=0:
+                a='0'+a
+        print(a)
+        l=len(a)
+        x=[]
+        for i in range((l/4)-1):
+            x.append(a[0+(i*4):4*(1+i)])
+        x.append(a[4*((l/4)-1):])
+        k=['a','b','c','d','e','f']
+        for i in x:
+            y=int(i[0])*2**3+int(i[1])*2**2+int(i[2])*2+int(i[3])
+            if y>9:
+                ans=ans+k[y-10]
+            else:
+                ans=ans+str(y)
+        return ans
