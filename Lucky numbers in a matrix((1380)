@@ -1,0 +1,29 @@
+class Solution(object):
+    def luckyNumbers(self, matrix):
+        ans=[]
+        col=[]
+        m=matrix
+        for k in range(len(matrix[0])):
+            l=[]
+            for j in matrix:
+                l.append(-1*(j[k]))
+
+            col.append(l)
+        print(col)
+        z=0
+        for row in matrix:
+
+            z=0
+            for k in range(len(matrix[0])):
+
+                print(row[k],'and', -1*min(col[z]),'are equal')
+                print(min(j))
+                print(-1*(row[k])==min(col[z]))
+                if row[k]==min(row) and -1*(row[k])==min(col[z]):
+
+                    print(row[k],'and', col[z],'are equal')
+                    print("yes")
+                    ans.append(row[k])
+                z+=1
+        return ans
+
