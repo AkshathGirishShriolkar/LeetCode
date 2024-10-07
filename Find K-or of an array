@@ -1,0 +1,41 @@
+class Solution(object):
+    def findKOr(self, nums, k):
+        maxi=max(nums)
+        
+        l=len(bin(maxi).replace('0b',''))
+        count=0
+        b=[]
+        
+        for j in range(l):
+            count=0
+            for i in nums:
+                bi=bin(i).replace('0b','')
+
+                while len(bi)<l:
+                    bi='0'+bi
+                try:
+                    count=count+int(bi[j])
+                except:
+                    count=count+0
+
+            b.append(count)
+        
+
+        print('b is',b)
+        ans=''
+        for j in b:
+            if int(j)>=k:
+                ans=ans+'1'
+            else:
+                ans=ans+'0'
+        answer=0
+
+        for i in range(len(ans)):
+
+            answer=answer+(int(ans[i]))*2**(len(ans)-(1+i))
+
+        return answer
+
+
+
+
