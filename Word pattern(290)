@@ -1,0 +1,29 @@
+class Solution(object):
+    def wordPattern(self, pattern, s):
+        d=[]
+        s=str(s)
+        pattern=str(pattern)
+        a=s.split()
+        if len(a)!=len(pattern):
+            return False
+        print(a)
+        c=[]
+        for i in range(len(pattern)):
+            if pattern[i] not in d:
+                d.append(pattern[i])
+                c.append(a[i])
+            elif c[d.index(pattern[i])]!=a[i]:
+                print('hi')
+                print(c[d.index(pattern[i])])
+                print(pattern[i])
+                return False
+        print(d)
+        print(c)
+        x=set()
+        for i in c:
+            x.add(i)
+        if len(c)!=len(x):
+            return False
+        print(c)
+        print('len of x is',len(x))
+        return True
