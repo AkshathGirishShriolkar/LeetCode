@@ -1,0 +1,50 @@
+class Solution(object):
+    def movesToMakeZigzag(self, nums):
+        if len(nums)<3:
+            return 0
+        o=0
+        e=0
+        nums2=[]
+        for i in nums:
+            nums2.append(i)
+        if (len(nums)%2==0):
+            nums2.append(0)
+        print('nums2 is',nums2)
+        for j in range(int(floor(len(nums2)/2))):     #odd indices
+            i=1+2*j
+            print('element chosen (odd) is',nums2[i])
+            if -nums2[i]+nums2[i+1]+1>0:
+                o+=-nums2[i]+nums2[i+1]+1
+                nums2[i+1]=nums2[i]-(1)
+                print(o,'because ',nums2[i],'>',nums2[i+1])
+            if -nums2[i]+nums2[i-1]+1>0:
+                o+=-nums2[i]+nums2[i-1]+1
+                nums2[i-1]=nums2[i]-(1)
+                print(o,'because ',nums2[i],'>',nums2[i-1])
+        if (len(nums)%2)==1:
+            nums.append(0)
+        print(nums)
+        if nums[1]-nums[0]+1>0:
+            e+=nums[1]-nums[0]+1
+            nums[1]=nums[0]-1
+            print(e,'because ',nums[0],'>',nums[1])
+        print(nums)
+
+
+        for j in range(1,(len(nums))/2):    #even indices
+            i=j*2
+            print('element chosen (even) is',nums[i])
+            if -nums[i]+nums[i+1]+1>0:
+                e+=-nums[i]+nums[i+1]+1
+                nums[i+1]=nums[i]-(1)
+                print(e,'because ',nums[i],'>',nums[i+1])
+            if -nums[i]+nums[i-1]+1>0:
+                e+= -nums[i]+nums[i-1]+1
+                nums[i-1]=nums[i]-(1)
+                print(e,'because ',nums[i],'>',nums[i-1])
+
+        print('o is',o,"e is",e)
+        return min(e,o)
+
+
+        
