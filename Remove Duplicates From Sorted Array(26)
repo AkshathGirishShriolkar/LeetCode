@@ -1,0 +1,42 @@
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        '''
+        s=set()
+        a=[]
+        l=0
+        for i in range(len(nums)):
+            s.add(nums[i])
+            x=len(s)-l
+            l=len(s)
+            if x:
+                a.append(nums[i])
+        y=len(a)
+        for i in range(len(a)):
+            nums[i]=a[i]
+        print(nums)
+        return y
+        '''
+        s=set()
+        a=[]
+        ix=0
+        l=0
+        for i in range(len(nums)):
+            s.add(nums[i])
+            x=len(s)-l
+            l=len(s)
+            #print('for step',i,' nums before is',nums)
+            if x:
+                nums[ix]=(nums[i])
+                ix+=1
+                #print('nums changed')
+            #print('for step',i,' nums after is',nums)
+        y=ix+1
+        lx=len(nums)
+
+        for i in range(lx-(ix)):
+            nums.pop()
+        #for i in range(len(a)):
+        #   nums[i]=a[i]
+        
+        return y
+        
