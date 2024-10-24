@@ -1,0 +1,9 @@
+class Solution:
+    def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
+        a=[]
+        for i in range(len(image)):
+            image[i].reverse()
+        for i in range(len(image)):
+            for j in range(len(image[i])):
+                (image[i])[j]=(image[i])[j]*(-1)+1
+        return image
