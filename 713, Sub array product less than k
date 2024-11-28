@@ -1,0 +1,19 @@
+class Solution:
+    def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
+        l=0
+        if k<2:
+            return 0
+        if set(nums)=={1}:
+            s=0
+            for i in range(len(nums)):
+                s+=(i+1)
+            return s
+        for i in range(len(nums)):
+            s=1
+            for j in range(i,len(nums)):
+                s=s*nums[j]
+                if s>=k:
+                    break
+                l+=1
+        return l
+713,. Subarray product less t
