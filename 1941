@@ -1,0 +1,15 @@
+class Solution:
+    def areOccurrencesEqual(self, s: str) -> bool:
+        l=[]
+        no=[]   
+        for i in s:
+            if i not in l:
+                l.append(i)
+                no.append(1)
+            else:
+                idx=l.index(i)
+                no[idx]+=1
+        s=set(no)
+        if len(s)==1:
+            return True
+        return False
