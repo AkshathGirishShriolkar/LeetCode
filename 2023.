@@ -1,0 +1,14 @@
+class Solution:
+    def numOfPairs(self, nums: List[str], target: str) -> int:
+        leng=len(nums)
+        count=0
+        for i in range(leng):
+            for j in range(leng):
+                if i==j:
+                    break
+                else:
+                    if nums[i]+nums[j]==target:
+                        count+=1
+                    if nums[j]+nums[i]==target:
+                        count+=1
+        return count
