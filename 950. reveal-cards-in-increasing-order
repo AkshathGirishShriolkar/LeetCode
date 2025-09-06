@@ -1,0 +1,79 @@
+// code for defining the structre of circular doubly linked queue
+struct node{
+    int data;
+    struct node* next;
+    struct node* prev;
+};
+struct CircularQueue{
+    struct node* front;
+    struct node* rear;
+};
+
+//function for selection sort
+void so(int* deck,int deckSize){
+    int* a=(int*)malloc(sizeof(int)*deckSize);
+    int t;
+    int id;
+    int c;
+    for(int i=0;i<deckSize;i++){
+        for(int j=i;j<deckSize;j++){
+            if (j==i){
+                t=deck[j];
+                id=j;
+            }
+            else{
+                if (t<=deck[j]){
+                    t=deck[j];
+                    id=j;
+                }
+            }
+        }
+        deck[id]=deck[i];
+        deck[i]=t;
+    }
+}
+int* deckRevealedIncreasing(int* deck, int deckSize, int* returnSize) {
+    
+    //setting returnSize
+    *returnSize=deckSize;
+
+    // sort shit
+    so(deck,deckSize);
+    
+    //initializing the doubly circular queue
+    struct CircularQueue queue;
+    struct CircularQueue* q;
+    q=&queue;
+
+    //queue operation
+    for(int i=0;i<deckSize;i++){
+
+        //definition
+        struct node* temp=(struct node*)malloc(sizeof(struct node));
+        temp->next=NULL;
+        temp->prev=NULL;
+        temp->data=deck[i];
+
+        //rotating the queue
+        q->rear=q->rear->prev;
+        q->front=q->front->prev;
+
+        //inserting the new element(temp)
+        q->rear->next=temp;
+        temp->prev=q->rear;
+        temp->next=q->front;
+        q->front->prev=temp;
+
+        //setting the front variable as the new element(as new element is inserted at start)
+        q->front=temp;
+    }
+
+    //for converting doubly circular queue into array
+    int *ans=(int*)malloc(sizeof(int)*deckSize);
+    for (int i=0;i<deckSize;i++){
+        ans[i]=q->front->data;
+        q->front=q->front->next;
+    }
+
+    return ans;
+}
