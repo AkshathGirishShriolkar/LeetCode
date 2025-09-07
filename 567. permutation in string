@@ -1,0 +1,33 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        l1=len(s1)
+        l2=len(s2)
+        h2=Counter(s2[:l1])
+        h1=Counter(s1)
+        prev=''
+        for i in range(l2-l1+1):
+
+            #new element to be added
+            #or
+            #the last element in the sliding window per iteration
+            new_element=s2[l1-1+i]
+
+            #if case because at 0th iteration, prev='' and you are not adding a new element in h2 dictionary
+            if prev!='':
+
+                #removing the leftmost element in the last iteration window
+                h2[prev]-=1
+
+                #if the new element is in the dictionary keys
+                if new_element in h2.keys() and h2[new_element]!=0:
+                    h2[new_element]+=1
+
+                #if the new element is not there in dictionary keys
+                else:
+                    h2[new_element]=1
+                prev=s2[i]
+            
+            #final condition
+            if h2==h1:
+                return True
+        return False
