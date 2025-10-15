@@ -1,9 +1,31 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
+        start=0
+        end=len(s)-1
+        leng=len(s)
+        if s=='':
+            return True
+        while(start<end):
+            while start<leng and not(s[start].isalnum()):
+                start+=1
+            while end>=0 and not(s[end].isalnum()):
+                end-=1
+            if start>=end:
+                return True
+            if s[start].lower()!=s[end].lower():
+                return False
+            else:
+                start+=1
+                end-=1
+        return True
+
+
+"""class Solution:
+    def isPalindrome(self, s: str) -> bool:
         st=''
         for i in s:
             if i.isalpha() or i.isnumeric():#not in [' ',',','.',':',':','@','#']:
                 st=st+i.lower()
         if st==st[::-1]:
             return True
-        return False
+        return False"""
