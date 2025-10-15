@@ -11,7 +11,7 @@ class Solution:
             ans[leng-i-1]*=post
         return ans
 
-/*
+"""
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         pr=1
@@ -34,7 +34,4 @@ class Solution:
                 #print(3)
                 a.append((pr)//(nums[i]))
         return a
-
-
-
-*/
+"""
