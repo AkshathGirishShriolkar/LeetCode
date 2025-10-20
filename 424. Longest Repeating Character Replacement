@@ -1,0 +1,19 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        
+        s1=set(s)
+        start=0
+        if 1==len(s1):
+            return len(s)
+        d=dict()
+        for i in s1:
+            d[i]=0
+    
+        m=0
+        for end in range(len(s)):
+            d[s[end]]+=1
+            while ((end-start+1)-max(d.values())>k):
+                d[s[start]]-=1
+                start+=1
+            m=max(end-start+1,m)
+        return m
