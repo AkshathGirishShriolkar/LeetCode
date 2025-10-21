@@ -1,0 +1,47 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        leng1=len(s)
+        leng2=len(t)
+        h2=Counter(t)
+        h2s=set(h2.keys())
+        h2l=len(h2.keys())
+        start=0
+        ans=''
+        while (start<leng1-leng2+1):
+            #minimize by adjusting start
+            if s[start] not in h2s:
+                start+=1
+                continue    
+            end=start
+            h1=defaultdict(int)
+            no_matches=h2l
+            while (end<leng1):
+
+                #inserting new element into the dict
+                if s[end] in h2s:
+                    h1[s[end]]+=1
+
+                #
+                    if h2[s[end]]==h1[s[end]]:
+                        no_matches-=1
+
+                #
+                while no_matches==0:
+                    if ans=='':
+                        ans=s[start:end+1]
+                    else:
+                        ans=min([ans,s[start:end+1]],key=len)
+                    #break
+                    if s[start] in h2s:
+                        h1[s[start]]-=1
+                        if h1[s[start]]<h2[s[start]]:
+                            no_matches+=1
+                    start+=1
+                    
+
+                end+=1
+
+            #incrementing start
+            start+=1
+
+        return ans
