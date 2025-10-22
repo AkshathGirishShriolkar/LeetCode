@@ -1,0 +1,16 @@
+class Solution:
+    def maxSum(self, nums: List[int]) -> int:
+        s=0
+        cond=0
+        sett=set()
+        for i in nums:
+            if i not in sett:
+                sett.add(i)
+                if i>0:
+                    s+=i
+                    cond=1
+        if cond==0:
+            return max(nums)
+        else:
+            return s
+            
