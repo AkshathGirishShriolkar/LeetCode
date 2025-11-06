@@ -1,0 +1,23 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        d={']':'[', ')':'(','}':'{'}
+        st=[]
+        ik=0
+        for i in s:
+            #print("iteration", ik)
+            if i in d.keys():
+                #print(i,"is in d.keys")
+                if st==[] or d[i]!=st[-1]:
+                    #print("exit 1")
+                    return False
+                else:
+                    #print("the element removed is",st[-1])
+                    st.pop(-1)
+            elif i in d.values():
+                #print("appended ",i)
+                st.append(i)
+        if st==[]:
+            #print("exit 2")
+            return True
+        #print("exit 3")
+        return False
