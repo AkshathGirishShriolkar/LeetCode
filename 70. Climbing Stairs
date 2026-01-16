@@ -1,0 +1,38 @@
+//brute force
+/*void pseudo_fn(int target,int n, int* s){
+    if (n==target){
+        (*s)+=1;
+        return;
+    }
+    else if(n>target){
+        return;
+    }
+    pseudo_fn(target,n+1,s);
+    pseudo_fn(target,n+2,s);
+}*/
+int climbStairs(int n) {
+    //brute force
+    /*
+    int su=0;
+    int* s=&su;
+    int target=n;
+    n=0;
+    pseudo_fn(target,n,s);
+    return *s;
+    */
+
+    //bottom up approach
+    int a=1;
+    int b=1;
+    n=n-1;
+    while (n--){
+        if (n%2==0){
+            a=a+b;
+        }
+        else{
+            b=a+b;
+        }
+    }
+    if (a<b)return b;
+    return a;
+}
