@@ -1,0 +1,12 @@
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        previous_2s_exponent=2
+        ans=[0,1]
+        if n==0:
+            return [0]
+        for i in range(2,n+1):
+            if i==previous_2s_exponent:
+                previous_2s_exponent*=2
+            ans.append(1+ans[(i-previous_2s_exponent)])
+        return ans
+            
