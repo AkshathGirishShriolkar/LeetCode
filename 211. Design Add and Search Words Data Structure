@@ -1,0 +1,38 @@
+class node:
+    def __init__(self):
+        self.characters=dict()
+        self.end=False
+        
+class WordDictionary:
+
+    def __init__(self):
+        self.root=node()
+
+    def addWord(self, word: str) -> None:
+        curr=self.root
+        for c in word:
+            if c not in curr.characters.keys():
+                curr.characters[c]=node()
+            curr=curr.characters[c]
+        curr.end=True
+    def search(self, word: str) -> bool:
+        def dfs(idx,root):
+            curr=root
+            for i in range(len(word[idx:])):
+                c=word[idx+i]
+                if c=='.':
+                    for k in curr.characters.keys():
+                        if dfs(idx+i+1,curr.characters[k]): 
+                            return True
+                    return False
+                elif c not in curr.characters.keys():
+                    return False
+                curr=curr.characters[c]
+            return curr.end
+        return dfs(0,self.root)
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)
