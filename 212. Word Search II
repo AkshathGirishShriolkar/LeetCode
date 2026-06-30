@@ -1,0 +1,41 @@
+class TrieNode:
+    def __init__(self):
+        self.children={}
+        self.word=False
+    def addWord(self,word):
+        curr=self
+        for c in word:
+            if c not in curr.children:
+                curr.children[c]=TrieNode()
+            curr=curr.children[c]
+        curr.word=True
+
+class Solution:
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        m=len(board)
+        n=len(board[0])
+        visited=set()
+        b=TrieNode()
+        for i in words:
+            b.addWord(i)
+        #make prefix tree.
+
+        def dfs(i,j,a,s):
+            if board[i][j] in a.children and a.children[board[i][j]].word:
+                aks.add(s+board[i][j])
+            if (i,j) not in visited and board[i][j] in a.children:
+                visited.add((i,j))
+                s=s+board[i][j]
+                ans = (
+                    (dfs(i-1, j, a.children[board[i][j]],s) if i != 0 and (i-1, j) not in visited else False)
+                    or (dfs(i, j-1, a.children[board[i][j]],s) if j != 0 and (i, j-1) not in visited else False)
+                    or (dfs(i+1, j, a.children[board[i][j]],s) if i < m-1 and (i+1, j) not in visited else False)
+                    or (dfs(i, j+1, a.children[board[i][j]],s) if j < n-1 and (i, j+1) not in visited else False)
+                )
+                visited.remove((i,j)) 
+        aks=set()
+        for i in range(m):
+            for j in range(n):
+                dfs(i,j,b,'')
+                visited=set()
+        return list(aks)
