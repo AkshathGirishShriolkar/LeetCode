@@ -1,0 +1,25 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        m=len(board)
+        n=len(board[0])
+        visited=set()
+        def dfs(i,j,s):
+            if s=='':
+                return True
+            if (i,j) not in visited and board[i][j]==s[0]:
+                visited.add((i,j))
+                if len(s)==1:
+                    return True
+                ans= (dfs(i-1,j,s[1:]) if i!=0 and (i-1,j) not in visited else False) or (dfs(i,j-1,s[1:]) if j!=0 and (i,j-1) not in visited else False) or (dfs(i+1,j,s[1:]) if i<m-1 and (i+1,j) not in visited else False) or ((dfs(i,j+1,s[1:]) if j<n-1 and (i,j+1) not in visited else False))
+                visited.remove((i,j)) 
+                return ans
+            else:
+
+                return False
+        for i in range(m):
+            for j in range(n):
+                
+                if dfs(i,j,word):
+                    return True
+                visited=set()
+        return False
