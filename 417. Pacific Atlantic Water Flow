@@ -1,0 +1,29 @@
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        m=len(heights)
+        n=len(heights[0])
+        ocean=[[[0 for i in range(n)] for j in range(m)] for i in range(2)]
+        def dfs(i,j,k):
+            if ocean[k][i][j]==1:
+                return
+            ocean[k][i][j]=1
+            if i!=0 and heights[i-1][j] >= heights[i][j]:
+                dfs(i-1,j,k)
+            if j!=0 and heights[i][j-1] >= heights[i][j]:
+                dfs(i,j-1,k)
+            if j!=n-1 and heights[i][j+1] >= heights[i][j]:
+                dfs(i,j+1,k)
+            if i!=m-1 and heights[i+1][j] >= heights[i][j]:
+                dfs(i+1,j,k)
+        for i in range(m):
+            for j in range(n):
+                if i==0 or j==0:
+                    dfs(i,j,1)
+                if j==n-1 or i==m-1:
+                    dfs(i,j,0)
+        ans=[]
+        for i in range(m):
+            for j in range(n):
+                if ocean[0][i][j]*ocean[1][i][j]==1:
+                    ans.append([i,j])
+        return ans
